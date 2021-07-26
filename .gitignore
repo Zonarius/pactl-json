@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/volume-ctl
+volume-ctl.so
+volume-ctl.dylib
+volume-ctl.dll
+volume-ctl.a
+volume-ctl.lib
+volume-ctl-test-*
+*.exe
+*.o
+*.obj
+*.lst

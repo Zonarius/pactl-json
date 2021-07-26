@@ -1,0 +1,12 @@
+{
+	"authors": [
+		"pg"
+	],
+	"copyright": "Copyright © 2021, pg",
+	"description": "A tool to control the volume of applications",
+	"license": "MIT",
+	"name": "volume-ctl",
+	"libs": [
+		"libpulse"
+	]
+}
