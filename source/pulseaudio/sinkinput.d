@@ -2,6 +2,7 @@ module pulseaudio.sinkinput;
 
 import std.string;
 import std.conv;
+import pulseaudio.util;
 
 import pulseaudio.bindings.pulse.introspect;
 
@@ -19,7 +20,7 @@ class SinkInput {
   immutable string resample_method; /**< The resampling method used by this sink input. */
   immutable string driver; /**< Driver name */
   immutable bool mute; /**< Stream muted \since 0.9.7 */
-  // immutable pa_proplist* proplist; /**< Property list \since 0.9.11 */
+  immutable string[string] proplist; /**< Property list \since 0.9.11 */
   immutable bool corked; /**< Stream corked \since 1.0 */
   immutable bool has_volume; /**< Stream has volume. If not set, then the meaning of this struct's volume member is unspecified. \since 1.0 */
   immutable bool volume_writable; /**< The volume can be set. If not set, the volume can still change even though clients can't control the volume. \since 1.0 */
@@ -38,6 +39,7 @@ class SinkInput {
     resample_method = input.resample_method.to!string;
     driver = input.driver.to!string;
     mute = input.mute.to!bool;
+    proplist = input.proplist.toMap;
     corked = input.corked.to!bool;
     has_volume = input.has_volume.to!bool;
     volume_writable = input.volume_writable.to!bool;
