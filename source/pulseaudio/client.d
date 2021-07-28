@@ -2,21 +2,28 @@ module pulseaudio.client;
 
 import std.experimental.logger;
 import std.stdio;
+import std.string;
 
 import pulseaudio.bindings.pulse.def;
 import pulseaudio.bindings.pulse.mainloop;
 import pulseaudio.bindings.pulse.mainloopapi;
 import pulseaudio.bindings.pulse.context;
+import pulseaudio.bindings.pulse.introspect;
 import pulseaudio.lib.context;
 import pulseaudio.bindings.pulse.error;
 
 import pulseaudio.util;
+import pulseaudio.sinkinput;
+import pulseaudio.bindings.pulse.operation;
 
 /// A client to communicate to a PulseAudio server.
 class Client {
   private pa_mainloop* mainloop;
   private pa_mainloop_api* api;
   private pa_context* ctx;
+  private int retval = 0;
+  private SinkInput[] sinks;
+  private auto cbDone = false;
 
   /// Creates a new client using the default PulseAudio server.
   this() {
@@ -27,12 +34,35 @@ class Client {
   this(string address) {
     setup();
     if (address is null) {
-      info("Establishing connection to default PulseAudio server");
+      trace("Establishing connection to default PulseAudio server");
     } else {
-      infof("Establishing connection to PulseAudio server with address %s", address);
+      tracef("Establishing connection to PulseAudio server with address %s", address);
     }
     connect(address);
-    info("Connected!");
+    trace("Connected!");
+  }
+
+  SinkInput[] getSinkInputs() {
+    auto op = pa_context_get_sink_input_info_list(ctx, &sinkInputCallBack, cast(void*) this);
+    cbDone = false;
+    sinks = [];
+    while (!cbDone) {
+      pa_mainloop_iterate(mainloop, 1, null);
+    }
+    pa_operation_unref(op);
+    return sinks;
+  }
+
+  private static extern(C) void sinkInputCallBack(pa_context* ctx, const pa_sink_input_info *i, int eol, void* userdata) {
+    auto clnt = cast(Client)userdata;
+    if (!eol) {
+      auto si = new SinkInput(i);
+      clnt.sinks ~= [si];
+      trace(si.name);
+    } else {
+      clnt.cbDone = true;
+      trace("Done getting Sink Inputs");
+    }
   }
 
   private void setup() {

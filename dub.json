@@ -3,10 +3,13 @@
 		"pg"
 	],
 	"copyright": "Copyright © 2021, pg",
+	"dependencies": {
+		"hunt": "~>1.7.8"
+	},
 	"description": "A tool to control the volume of applications",
-	"license": "MIT",
-	"name": "volume-ctl",
 	"libs": [
 		"libpulse"
-	]
+	],
+	"license": "MIT",
+	"name": "volume-ctl"
 }
