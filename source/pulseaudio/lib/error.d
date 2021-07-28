@@ -4,6 +4,8 @@ import std.string;
 import std.conv;
 import std.traits;
 
+import pulseaudio.bindings.pulse.error;
+
 /// An error that originated from PulseAudio.
 class PulseAudioException : Exception {
   /// The error number
@@ -27,8 +29,3 @@ template wrapErrFunc(alias fun)
     }
   }
 }
-
-extern (C):
-
-/** Return a human readable error message for the specified numeric error code */
-char* pa_strerror(int error);

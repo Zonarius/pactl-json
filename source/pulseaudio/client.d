@@ -3,10 +3,12 @@ module pulseaudio.client;
 import std.experimental.logger;
 import std.stdio;
 
-import pulseaudio.lib.mainloop;
-import pulseaudio.lib.mainloopapi;
+import pulseaudio.bindings.pulse.def;
+import pulseaudio.bindings.pulse.mainloop;
+import pulseaudio.bindings.pulse.mainloopapi;
+import pulseaudio.bindings.pulse.context;
 import pulseaudio.lib.context;
-import pulseaudio.lib.error;
+import pulseaudio.bindings.pulse.error;
 
 import pulseaudio.util;
 
