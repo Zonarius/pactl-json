@@ -1,6 +1,19 @@
 module pulseaudio.lib.context;
 
 import pulseaudio.lib.mainloopapi;
+import pulseaudio.lib.error;
+
+
+/** Connect the context to the specified server. If server is NULL,
+ * connect to the default server. This routine may but will not always
+ * return synchronously on error. Use pa_context_set_state_callback() to
+ * be notified when the connection is established. If flags doesn't have
+ * PA_CONTEXT_NOAUTOSPAWN set and no specific server is specified or
+ * accessible a new daemon is spawned. If api is non-NULL, the functions
+ * specified in the structure are used when forking a new child
+ * process. Returns negative on certain errors such as invalid state
+ * or parameters. */
+alias pa_context_connect_err = wrapErrFunc!(pa_context_connect);
 
 extern (C):
 
@@ -63,7 +76,7 @@ pa_context *pa_context_new(pa_mainloop_api *mainloop, const char *name);
  * specified in the structure are used when forking a new child
  * process. Returns negative on certain errors such as invalid state
  * or parameters. */
-int pa_context_connect(pa_context *c, const char* server, pa_context_flags flags, const pa_spawn_api *api);
+private int pa_context_connect(pa_context *c, const char* server, pa_context_flags flags, const pa_spawn_api *api);
 
 /** Terminate the context connection immediately */
 void pa_context_disconnect(pa_context *c);
