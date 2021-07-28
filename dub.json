@@ -11,5 +11,15 @@
 		"libpulse"
 	],
 	"license": "MIT",
-	"name": "volume-ctl"
+	"name": "volume-ctl",
+	"targetType": "executable",
+	"configurations": [
+		{
+			"name": "debug"
+		},
+		{
+			"name": "release",
+			"versions": ["StdLoggerDisableTrace", "StdLoggerDisableInfo"]
+		}
+	]
 }

@@ -21,7 +21,6 @@ class Client {
   private pa_mainloop* mainloop;
   private pa_mainloop_api* api;
   private pa_context* ctx;
-  private int retval = 0;
   private SinkInput[] sinks;
   private auto cbDone = false;
 
@@ -44,12 +43,12 @@ class Client {
 
   SinkInput[] getSinkInputs() {
     auto op = pa_context_get_sink_input_info_list(ctx, &sinkInputCallBack, cast(void*) this);
+    scope(exit) pa_operation_unref(op);
     cbDone = false;
     sinks = [];
     while (!cbDone) {
       pa_mainloop_iterate(mainloop, 1, null);
     }
-    pa_operation_unref(op);
     return sinks;
   }
 
