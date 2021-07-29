@@ -60,6 +60,6 @@ void main(string[] args)
 	}
 }
 
-struct AllInfo {
+package struct AllInfo {
 	SinkInput[] sinkInputs;
 }

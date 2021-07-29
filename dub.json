@@ -12,15 +12,5 @@
 	],
 	"license": "MIT",
 	"name": "pactl-json",
-	"targetType": "executable",
-	"configurations": [
-		{
-			"name": "debug"
-		},
-		{
-			"name": "release",
-			"versions": ["StdLoggerDisableTrace", "StdLoggerDisableInfo"],
-			"targetPath": "release"
-		}
-	]
+	"targetType": "executable"
 }
