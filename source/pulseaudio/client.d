@@ -67,7 +67,7 @@ class Client {
   private void setup() {
     mainloop = pa_mainloop_new();
     api = pa_mainloop_get_api(mainloop);
-    ctx = pa_context_new(api, "volume-ctl");
+    ctx = pa_context_new(api, "pactl-json");
   }
 
   /// Blocks until a connection is established

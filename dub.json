@@ -11,7 +11,7 @@
 		"libpulse"
 	],
 	"license": "MIT",
-	"name": "volume-ctl",
+	"name": "pactl-json",
 	"targetType": "executable",
 	"configurations": [
 		{
@@ -19,7 +19,8 @@
 		},
 		{
 			"name": "release",
-			"versions": ["StdLoggerDisableTrace", "StdLoggerDisableInfo"]
+			"versions": ["StdLoggerDisableTrace", "StdLoggerDisableInfo"],
+			"targetPath": "/home/pg/bin"
 		}
 	]
 }

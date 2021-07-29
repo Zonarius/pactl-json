@@ -8,7 +8,7 @@
       "name": "Debug",
       "type": "gdb",
       "request": "launch",
-      "target": "./volume-ctl",
+      "target": "./pactl-json",
       "cwd": "${workspaceRoot}",
       "valuesFormatting": "parseText"
     }
