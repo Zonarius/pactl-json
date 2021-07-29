@@ -6,7 +6,8 @@ import pulseaudio.util;
 
 import pulseaudio.bindings.pulse.introspect;
 
-class SinkInput {
+/// Stores information about sink inputs.
+struct SinkInput {
   immutable int index; /**< Index of the sink input */
   immutable string name; /**< Name of the sink input */
   immutable int owner_module; /**< Index of the module this sink input belongs to, or PA_INVALID_INDEX when it does not belong to any module. */
@@ -26,6 +27,7 @@ class SinkInput {
   immutable bool volume_writable; /**< The volume can be set. If not set, the volume can still change even though clients can't control the volume. \since 1.0 */
   // immutable pa_format_info* format; /**< Stream format information. \since 1.0 */
 
+  /// Creates a [SinkInput] from a PulseAudio [pa_sink_input_info]
   this(const(pa_sink_input_info*) input) {
     assert(input !is null);
     

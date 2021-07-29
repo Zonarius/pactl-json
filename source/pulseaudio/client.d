@@ -55,7 +55,7 @@ class Client {
   private static extern(C) void sinkInputCallBack(pa_context* ctx, const pa_sink_input_info *i, int eol, void* userdata) {
     auto clnt = cast(Client)userdata;
     if (!eol) {
-      auto si = new SinkInput(i);
+      auto si = SinkInput(i);
       clnt.sinks ~= [si];
       trace(si.name);
     } else {
