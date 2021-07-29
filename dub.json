@@ -20,7 +20,7 @@
 		{
 			"name": "release",
 			"versions": ["StdLoggerDisableTrace", "StdLoggerDisableInfo"],
-			"targetPath": "/home/pg/bin"
+			"targetPath": "release"
 		}
 	]
 }
